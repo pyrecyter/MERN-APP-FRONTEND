@@ -1,5 +1,4 @@
 
-import Layout from '../components/Layout';
 import { useUser } from '../hooks/useUser';
 import { Typography } from '@mui/material';
 
@@ -7,7 +6,7 @@ const AccountPage = () => {
   const { user } = useUser();
 
   return (
-    <Layout>
+    <>
       <Typography variant="h4" component="h1" gutterBottom>
         Account Page
       </Typography>
@@ -20,7 +19,7 @@ const AccountPage = () => {
       ) : (
         <Typography variant="h6">No user data available.</Typography>
       )}
-    </Layout>
+    </>
   );
 };
 
