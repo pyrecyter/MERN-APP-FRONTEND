@@ -1,0 +1,44 @@
+import Cookies from "js-cookie";
+import type { AuthResponse } from "../types/auth";
+import type { User } from "../types/user";
+import { api } from "../utils/api";
+
+export const login = async (
+  email: string,
+  password: string
+): Promise<{ success: boolean; message?: string; user?: User }> => {
+  try {
+    const data = await api.post<AuthResponse>("/auth/login", {
+      email,
+      password,
+    });
+
+    Cookies.set("token", data.token, { expires: 7 });
+    return { success: true, user: data.user };
+  } catch (error: unknown) {
+    console.error("Login error:", error);
+    return {
+      success: false,
+      message:
+        (error as Error).message || "Network error or server is unreachable",
+    };
+  }
+};
+
+export const logout = () => {
+  Cookies.remove("token");
+};
+
+export const isAuthenticated = () => {
+  return !!Cookies.get("token");
+};
+
+export const fetchUser = async (): Promise<User | null> => {
+  try {
+    const user = await api.get<User>("/auth/me");
+    return user;
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    return null;
+  }
+};
