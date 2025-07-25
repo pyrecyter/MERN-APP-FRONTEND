@@ -39,6 +39,7 @@ export const fetchUser = async (): Promise<User | null> => {
     return user;
   } catch (error) {
     console.error("Failed to fetch user:", error);
+    logout();
     return null;
   }
 };
