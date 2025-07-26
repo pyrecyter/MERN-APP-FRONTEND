@@ -31,7 +31,13 @@ async function apiCall<T>(
 
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(errorData.message || "Something went wrong");
+    let errorMessage = "Something went wrong";
+    if (errorData.errors && Array.isArray(errorData.errors)) {
+      errorMessage = errorData.errors.join(", ");
+    } else if (errorData.message) {
+      errorMessage = errorData.message;
+    }
+    throw new Error(errorMessage);
   }
 
   return response.json();

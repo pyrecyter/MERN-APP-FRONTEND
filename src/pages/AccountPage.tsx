@@ -1,8 +1,19 @@
+import { useState } from "react";
 import { useUser } from "../hooks";
-import { Typography } from "@mui/material";
+import { Typography, Button, Box } from "@mui/material";
+import { UserProfileDisplay, PasswordResetModal } from "../components";
 
 const AccountPage = () => {
   const { user } = useUser();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -11,13 +22,17 @@ const AccountPage = () => {
       </Typography>
       {user ? (
         <>
-          <Typography variant="h6">Name: {user.name}</Typography>
-          <Typography variant="h6">Email: {user.email}</Typography>
-          <Typography variant="h6">Role: {user.role}</Typography>
+          <UserProfileDisplay user={user} />
+          <Box sx={{ mt: 2 }}>
+            <Button variant="contained" onClick={handleOpenModal}>
+              Change Password
+            </Button>
+          </Box>
         </>
       ) : (
         <Typography variant="h6">No user data available.</Typography>
       )}
+      <PasswordResetModal open={isModalOpen} onClose={handleCloseModal} />
     </>
   );
 };

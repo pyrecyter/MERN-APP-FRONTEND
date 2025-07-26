@@ -42,3 +42,11 @@ export const fetchUser = async (): Promise<User | null> => {
     return null;
   }
 };
+
+export const changePassword = async (
+  password: string,
+  newPassword: string,
+  confirmPassword: string,
+): Promise<void> => {
+  await api.post("/auth/change-password", { password, newPassword, confirmPassword });
+};

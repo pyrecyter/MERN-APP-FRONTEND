@@ -1,15 +1,17 @@
+import React, { Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import ProductsPage from "../pages/ProductsPage";
-import CartPage from "../pages/CartPage";
-import AccountPage from "../pages/AccountPage";
-import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import { permissions } from "../types";
-import ManageUsersPage from "../pages/ManageUsersPage";
-import SalesPage from "../pages/SalesPage";
 import App from "../App";
+
+const HomePage = React.lazy(() => import("../pages/HomePage"));
+const ProductsPage = React.lazy(() => import("../pages/ProductsPage"));
+const CartPage = React.lazy(() => import("../pages/CartPage"));
+const AccountPage = React.lazy(() => import("../pages/AccountPage"));
+const LoginPage = React.lazy(() => import("../pages/LoginPage"));
+const ManageUsersPage = React.lazy(() => import("../pages/ManageUsersPage"));
+const SalesPage = React.lazy(() => import("../pages/SalesPage"));
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,9 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <PrivateRoute>
-            <HomePage />
+            <Suspense fallback={<div>Loading...</div>}>
+              <HomePage />
+            </Suspense>
           </PrivateRoute>
         ),
       },
@@ -28,7 +32,9 @@ const router = createBrowserRouter([
         path: "/products",
         element: (
           <PrivateRoute permission={permissions.manage_products}>
-            <ProductsPage />
+            <Suspense fallback={<div>Loading...</div>}>
+              <ProductsPage />
+            </Suspense>
           </PrivateRoute>
         ),
       },
@@ -36,7 +42,9 @@ const router = createBrowserRouter([
         path: "/cart",
         element: (
           <PrivateRoute permission={permissions.record_sale}>
-            <CartPage />
+            <Suspense fallback={<div>Loading...</div>}>
+              <CartPage />
+            </Suspense>
           </PrivateRoute>
         ),
       },
@@ -44,7 +52,9 @@ const router = createBrowserRouter([
         path: "/account",
         element: (
           <PrivateRoute>
-            <AccountPage />
+            <Suspense fallback={<div>Loading...</div>}>
+              <AccountPage />
+            </Suspense>
           </PrivateRoute>
         ),
       },
@@ -52,7 +62,9 @@ const router = createBrowserRouter([
         path: "/manage-users",
         element: (
           <PrivateRoute permission={permissions.manage_users}>
-            <ManageUsersPage />
+            <Suspense fallback={<div>Loading...</div>}>
+              <ManageUsersPage />
+            </Suspense>
           </PrivateRoute>
         ),
       },
@@ -60,7 +72,9 @@ const router = createBrowserRouter([
         path: "/sales",
         element: (
           <PrivateRoute permission={permissions.view_sales}>
-            <SalesPage />
+            <Suspense fallback={<div>Loading...</div>}>
+              <SalesPage />
+            </Suspense>
           </PrivateRoute>
         ),
       },
@@ -70,7 +84,9 @@ const router = createBrowserRouter([
     path: "/login",
     element: (
       <PublicRoute>
-        <LoginPage />
+        <Suspense fallback={<div>Loading...</div>}>
+          <LoginPage />
+        </Suspense>
       </PublicRoute>
     ),
   },
