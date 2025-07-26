@@ -1,6 +1,5 @@
-
-import { useUser } from '../hooks/useUser';
-import { Typography } from '@mui/material';
+import { useUser } from "../hooks";
+import { Typography } from "@mui/material";
 
 const AccountPage = () => {
   const { user } = useUser();

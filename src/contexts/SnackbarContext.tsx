@@ -1,7 +1,12 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 interface SnackbarContextProps {
-  showMessage: (message: string, severity?: 'success' | 'error' | 'warning' | 'info') => void;
+  showMessage: (
+    message: string,
+    severity?: "success" | "error" | "warning" | "info",
+  ) => void;
 }
 
-export const SnackbarContext = createContext<SnackbarContextProps | undefined>(undefined);
+export const SnackbarContext = createContext<SnackbarContextProps | undefined>(
+  undefined,
+);

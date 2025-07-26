@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { Snackbar, Alert } from "@mui/material";
-import { SnackbarContext } from "../contexts/SnackbarContext";
+import { SnackbarContext } from "../contexts";
 
 export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState(false);
@@ -12,7 +12,7 @@ export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
 
   const showMessage = (
     newMessage: string,
-    newSeverity: "success" | "error" | "warning" | "info" = "info"
+    newSeverity: "success" | "error" | "warning" | "info" = "info",
   ) => {
     setMessage(newMessage);
     setSeverity(newSeverity);

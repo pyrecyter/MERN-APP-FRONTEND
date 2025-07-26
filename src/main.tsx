@@ -3,9 +3,8 @@ import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { RouterProvider } from "react-router-dom";
-import { SnackbarProvider } from "./providers/SnackbarProvider";
-import { UserProvider } from "./providers/UserProvider";
-import AppLoader from "./components/AppLoader";
+import { SnackbarProvider, UserProvider } from "./providers";
+import { AppLoader } from "./components";
 import theme from "./theme";
 import router from "./router";
 import "./index.css";
@@ -22,5 +21,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </UserProvider>
       </SnackbarProvider>
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

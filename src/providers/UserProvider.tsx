@@ -1,9 +1,8 @@
-
-import { useState, useEffect } from 'react';
-import type { ReactNode } from 'react';
-import type { User } from '../types/user';
-import { UserContext } from '../contexts/UserContext';
-import { fetchUser, isAuthenticated } from '../services/authService';
+import { useState, useEffect } from "react";
+import type { ReactNode } from "react";
+import type { User } from "../types";
+import { UserContext } from "../contexts";
+import { fetchUser, isAuthenticated } from "../services";
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);

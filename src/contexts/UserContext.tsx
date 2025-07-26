@@ -1,6 +1,5 @@
-
-import { createContext } from 'react';
-import type { User } from '../types/user';
+import { createContext } from "react";
+import type { User } from "../types";
 
 interface UserContextProps {
   user: User | null;
@@ -8,4 +7,6 @@ interface UserContextProps {
   loading: boolean;
 }
 
-export const UserContext = createContext<UserContextProps | undefined>(undefined);
+export const UserContext = createContext<UserContextProps | undefined>(
+  undefined,
+);

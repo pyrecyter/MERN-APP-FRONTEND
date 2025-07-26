@@ -1,13 +1,11 @@
-
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSnackbar } from '../useSnackbar';
-import { login } from '../../services/authService';
-import { useUser } from '../../hooks/useUser';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar, useUser } from "../";
+import { login } from "../../services";
 
 export const useLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { showMessage } = useSnackbar();
   const { setUser } = useUser();
@@ -15,13 +13,13 @@ export const useLogin = () => {
   const handleLogin = async () => {
     const result = await login(email, password);
     if (result.success) {
-      showMessage('Login successful!', 'success');
+      showMessage("Login successful!", "success");
       if (result.user) {
         setUser(result.user);
       }
-      navigate('/');
+      navigate("/");
     } else {
-      showMessage(result.message || 'An error occurred', 'error');
+      showMessage(result.message || "An error occurred", "error");
     }
   };
 

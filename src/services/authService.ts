@@ -1,11 +1,10 @@
 import Cookies from "js-cookie";
-import type { AuthResponse } from "../types/auth";
-import type { User } from "../types/user";
-import { api } from "../utils/api";
+import type { AuthResponse, User } from "../types";
+import { api } from "../utils";
 
 export const login = async (
   email: string,
-  password: string
+  password: string,
 ): Promise<{ success: boolean; message?: string; user?: User }> => {
   try {
     const data = await api.post<AuthResponse>("/auth/login", {

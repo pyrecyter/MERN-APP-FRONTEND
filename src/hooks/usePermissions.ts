@@ -1,5 +1,5 @@
 import { useUser } from "./useUser";
-import { rolePermissions } from "../types/roles";
+import { rolePermissions } from "../types";
 
 export const usePermissions = (permission: string) => {
   const { user } = useUser();

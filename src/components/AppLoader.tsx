@@ -1,19 +1,18 @@
+import { Box, CircularProgress } from "@mui/material";
+import { useUser } from "../hooks/useUser";
+import type { ReactNode } from "react";
 
-import { Box, CircularProgress } from '@mui/material';
-import { useUser } from '../hooks/useUser';
-import type { ReactNode } from 'react';
-
-const AppLoader = ({ children }: { children: ReactNode }) => {
+export const AppLoader = ({ children }: { children: ReactNode }) => {
   const { loading } = useUser();
 
   if (loading) {
     return (
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
         }}
       >
         <CircularProgress />
@@ -23,5 +22,3 @@ const AppLoader = ({ children }: { children: ReactNode }) => {
 
   return <>{children}</>;
 };
-
-export default AppLoader;

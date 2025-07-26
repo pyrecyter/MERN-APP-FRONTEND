@@ -10,7 +10,7 @@ interface RequestOptions extends RequestInit {
 
 async function apiCall<T>(
   endpoint: string,
-  options: RequestOptions = {}
+  options: RequestOptions = {},
 ): Promise<T> {
   const token = Cookies.get("token");
   const headers: Record<string, string> = {

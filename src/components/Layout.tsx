@@ -17,7 +17,7 @@ import { usePermissions } from "../hooks/usePermissions";
 import { permissions } from "../types/roles";
 import { useState } from "react";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+export const Layout = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
   const { user, setUser } = useUser();
   const { showMessage } = useSnackbar();
@@ -130,5 +130,3 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     </>
   );
 };
-
-export default Layout;
