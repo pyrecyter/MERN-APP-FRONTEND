@@ -1,12 +1,29 @@
-import React from "react";
-import { UserTable } from "../components";
+import React, { useState } from "react";
+import { UserTable, AddUserModal } from "../components";
+import { Button, Box } from "@mui/material";
 
 const ManageUsersPage: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div>
-      <h1>Manage Users</h1>
+    <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h1>Manage Users</h1>
+        <Button variant="contained" onClick={handleOpenModal}>
+          Add User
+        </Button>
+      </Box>
       <UserTable />
-    </div>
+      <AddUserModal open={isModalOpen} onClose={handleCloseModal} />
+    </Box>
   );
 };
 
