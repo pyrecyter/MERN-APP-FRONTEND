@@ -17,7 +17,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { getUsers, deleteUser } from "../../services";
 import type { User } from "../../types";
 import { useSnackbar, useUser } from "../../hooks";
-import { DeleteConfirmModal, EditUserModal } from ".";
+import { EditUserModal } from ".";
+import DeleteConfirmModal from "../DeleteConfirmModal";
 
 const UserTable = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -58,7 +59,10 @@ const UserTable = () => {
         showMessage("User deleted successfully!", "success");
         fetchUsers();
       } catch (err: unknown) {
-        showMessage((err as Error).message || "Failed to delete user.", "error");
+        showMessage(
+          (err as Error).message || "Failed to delete user.",
+          "error"
+        );
       } finally {
         setOpenDeleteModal(false);
         setUserToDelete(null);
@@ -96,10 +100,12 @@ const UserTable = () => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: 'bold' }}>Name</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Email</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Role</TableCell>
-            <TableCell sx={{ fontWeight: 'bold', textAlign: 'right' }}>Actions</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Email</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Role</TableCell>
+            <TableCell sx={{ fontWeight: "bold", textAlign: "right" }}>
+              Actions
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
