@@ -41,7 +41,7 @@ const PasswordResetModal = ({ open, onClose }: PasswordResetModalProps) => {
     }
 
     try {
-      await changePassword(password, newPassword, confirmPassword);
+      await changePassword({ password, newPassword, confirmPassword });
       showMessage("Password changed successfully!", "success");
       setPassword("");
       setNewPassword("");

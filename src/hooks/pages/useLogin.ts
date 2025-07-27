@@ -11,7 +11,7 @@ export const useLogin = () => {
   const { setUser } = useUser();
 
   const handleLogin = async () => {
-    const result = await login(email, password);
+    const result = await login({ email, password });
     if (result.success) {
       showMessage("Login successful!", "success");
       if (result.user) {

@@ -2,15 +2,26 @@ import Cookies from "js-cookie";
 import type { AuthResponse, User } from "../types";
 import { api } from "../utils";
 
-export const login = async (
-  email: string,
-  password: string,
-): Promise<{ success: boolean; message?: string; user?: User }> => {
+interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+interface LoginResponse {
+  success: boolean;
+  message?: string;
+  user?: User;
+}
+
+interface ChangePasswordPayload {
+  password: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
   try {
-    const data = await api.post<AuthResponse>("/auth/login", {
-      email,
-      password,
-    });
+    const data = await api.post<AuthResponse>("/auth/login", payload);
 
     Cookies.set("token", data.token, { expires: 7 });
     return { success: true, user: data.user };
@@ -43,10 +54,6 @@ export const fetchUser = async (): Promise<User | null> => {
   }
 };
 
-export const changePassword = async (
-  password: string,
-  newPassword: string,
-  confirmPassword: string,
-): Promise<void> => {
-  await api.post("/auth/change-password", { password, newPassword, confirmPassword });
+export const changePassword = async (payload: ChangePasswordPayload): Promise<void> => {
+  await api.post("/auth/change-password", payload);
 };
