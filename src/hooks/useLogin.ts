@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSnackbar, useUser } from "../";
-import { login } from "../../services";
+import { useSnackbar, useUser } from ".";
+import { login } from "../services";
 
 export const useLogin = () => {
   const [email, setEmail] = useState("");

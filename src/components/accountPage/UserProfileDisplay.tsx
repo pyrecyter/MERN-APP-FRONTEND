@@ -7,10 +7,7 @@ interface UserProfileDisplayProps {
 
 const UserProfileDisplay = ({ user }: UserProfileDisplayProps) => {
   return (
-    <>
-      <Typography variant="h5" component="div" gutterBottom>
-        User Profile
-      </Typography>
+    <Box sx={{ background: "#2333", p: 2 }}>
       <Box sx={{ mb: 1.5 }}>
         <Typography variant="body1">
           <b>Name:</b> {user.name}
@@ -26,7 +23,7 @@ const UserProfileDisplay = ({ user }: UserProfileDisplayProps) => {
           <b>Role:</b> {user.role}
         </Typography>
       </Box>
-    </>
+    </Box>
   );
 };
 

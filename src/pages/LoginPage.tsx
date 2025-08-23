@@ -7,7 +7,7 @@ import {
   Avatar,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useLogin } from "../hooks/pages/useLogin";
+import { useLogin } from "../hooks";
 
 const LoginPage = () => {
   const { email, setEmail, password, setPassword, handleLogin } = useLogin();

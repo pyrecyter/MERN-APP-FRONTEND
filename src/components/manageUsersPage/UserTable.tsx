@@ -18,7 +18,7 @@ import { getUsers, deleteUser } from "../../services";
 import type { User } from "../../types";
 import { useSnackbar, useUser } from "../../hooks";
 import { EditUserModal } from ".";
-import DeleteConfirmModal from "../DeleteConfirmModal";
+import { StyledTableCell, StyledTableRow, DeleteConfirmModal } from "../";
 
 const UserTable = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -96,61 +96,69 @@ const UserTable = () => {
   }
 
   return (
-    <TableContainer component={Paper} sx={{ mt: 4 }}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
-            <TableCell sx={{ fontWeight: "bold" }}>Email</TableCell>
-            <TableCell sx={{ fontWeight: "bold" }}>Role</TableCell>
-            <TableCell sx={{ fontWeight: "bold", textAlign: "right" }}>
-              Actions
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users.map((user) => (
-            <TableRow
-              key={user.email}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {user.name}
-              </TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.role}</TableCell>
-              <TableCell align="right">
-                <IconButton
-                  aria-label="edit"
-                  onClick={() => handleEditClick(user)}
-                >
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  aria-label="delete"
-                  onClick={() => handleDeleteClick(user)}
-                  disabled={currentUser?._id === user._id}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </TableCell>
+    <Box sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell sx={{ fontWeight: "bold" }}>
+                Name
+              </StyledTableCell>
+              <StyledTableCell sx={{ fontWeight: "bold" }}>
+                Email
+              </StyledTableCell>
+              <StyledTableCell sx={{ fontWeight: "bold" }}>
+                Role
+              </StyledTableCell>
+              <StyledTableCell sx={{ fontWeight: "bold", textAlign: "right" }}>
+                Actions
+              </StyledTableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <DeleteConfirmModal
-        open={openDeleteModal}
-        onClose={() => setOpenDeleteModal(false)}
-        onConfirm={handleConfirmDelete}
-        message={`Are you sure you want to delete user ${userToDelete?.name}?`}
-      />
-      <EditUserModal
-        open={openEditModal}
-        onClose={() => setOpenEditModal(false)}
-        user={userToEdit}
-        onUserUpdated={handleUserUpdated}
-      />
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {users.map((user) => (
+              <StyledTableRow
+                key={user.email}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {user.name}
+                </TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.role}</TableCell>
+                <TableCell align="right">
+                  <IconButton
+                    aria-label="edit"
+                    onClick={() => handleEditClick(user)}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleDeleteClick(user)}
+                    disabled={currentUser?._id === user._id}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <DeleteConfirmModal
+          open={openDeleteModal}
+          onClose={() => setOpenDeleteModal(false)}
+          onConfirm={handleConfirmDelete}
+          message={`Are you sure you want to delete user ${userToDelete?.name}?`}
+        />
+        <EditUserModal
+          open={openEditModal}
+          onClose={() => setOpenEditModal(false)}
+          user={userToEdit}
+          onUserUpdated={handleUserUpdated}
+        />
+      </TableContainer>
+    </Box>
   );
 };
 

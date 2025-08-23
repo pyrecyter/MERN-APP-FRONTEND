@@ -17,10 +17,17 @@ const style = {
   p: 4,
 };
 
-const EditCategoryModal: React.FC<{
+interface EditCategoryModalProps {
   category: Category;
   onClose: () => void;
-}> = ({ category, onClose }) => {
+  open: boolean;
+}
+
+const EditCategoryModal = ({
+  category,
+  onClose,
+  open,
+}: EditCategoryModalProps) => {
   const [name, setName] = useState(category.name);
   const { setCategories } = useCategories();
   const { showMessage } = useSnackbar();
@@ -32,6 +39,7 @@ const EditCategoryModal: React.FC<{
       setCategories((prev) =>
         prev.map((c) => (c._id === category._id ? updatedCategory : c))
       );
+      showMessage("Category updated", "success");
       onClose();
     } catch (err: unknown) {
       showMessage(
@@ -43,7 +51,7 @@ const EditCategoryModal: React.FC<{
 
   return (
     <Modal
-      open={true}
+      open={open}
       onClose={onClose}
       aria-labelledby="edit-category-modal-title"
       aria-describedby="edit-category-modal-description"

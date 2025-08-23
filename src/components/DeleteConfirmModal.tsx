@@ -19,7 +19,12 @@ const style = {
   p: 4,
 };
 
-const DeleteConfirmModal = ({ open, onClose, onConfirm, message }: DeleteConfirmModalProps) => {
+export const DeleteConfirmModal = ({
+  open,
+  onClose,
+  onConfirm,
+  message,
+}: DeleteConfirmModalProps) => {
   return (
     <Modal open={open} onClose={onClose}>
       <Box sx={style}>
@@ -27,7 +32,9 @@ const DeleteConfirmModal = ({ open, onClose, onConfirm, message }: DeleteConfirm
           Confirm Deletion
         </Typography>
         <Typography sx={{ mt: 2 }}>{message}</Typography>
-        <Box sx={{ mt: 3, display: "flex", justifyContent: "flex-end", gap: 2 }}>
+        <Box
+          sx={{ mt: 3, display: "flex", justifyContent: "flex-end", gap: 2 }}
+        >
           <Button variant="outlined" onClick={onClose}>
             Cancel
           </Button>
@@ -39,5 +46,3 @@ const DeleteConfirmModal = ({ open, onClose, onConfirm, message }: DeleteConfirm
     </Modal>
   );
 };
-
-export default DeleteConfirmModal;

@@ -57,11 +57,11 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Button color="inherit" component={Link} to="/">
-              Home
+              Products
             </Button>
             {canManageProducts && (
-              <Button color="inherit" component={Link} to="/products">
-                Products
+              <Button color="inherit" component={Link} to="/manage-products">
+                Manage Products
               </Button>
             )}
             {canRecordSale && (

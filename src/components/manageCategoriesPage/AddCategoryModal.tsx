@@ -26,6 +26,7 @@ const AddCategoryModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     try {
       const newCategory = await addCategory(name);
       setCategories((prev) => [...prev, newCategory]);
+      showMessage("Category added", "success");
       onClose();
     } catch (err: unknown) {
       showMessage((err as Error).message || "Failed to add category.", "error");

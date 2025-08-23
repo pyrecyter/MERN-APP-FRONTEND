@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Modal,
-  Box,
-  Typography,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 import { changePassword } from "../../services";
 import { useSnackbar } from "../../hooks";
 
@@ -26,7 +20,7 @@ const style = {
   p: 4,
 };
 
-const PasswordResetModal = ({ open, onClose }: PasswordResetModalProps) => {
+const ChangePasswordModal = ({ open, onClose }: PasswordResetModalProps) => {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -48,7 +42,10 @@ const PasswordResetModal = ({ open, onClose }: PasswordResetModalProps) => {
       setConfirmPassword("");
       onClose();
     } catch (err: unknown) {
-      showMessage((err as Error).message || "Failed to change password.", "error");
+      showMessage(
+        (err as Error).message || "Failed to change password.",
+        "error"
+      );
     }
   };
 
@@ -56,7 +53,7 @@ const PasswordResetModal = ({ open, onClose }: PasswordResetModalProps) => {
     <Modal open={open} onClose={onClose}>
       <Box sx={style}>
         <Typography variant="h6" component="h2" gutterBottom>
-          Reset Password
+          Change Password
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -101,4 +98,4 @@ const PasswordResetModal = ({ open, onClose }: PasswordResetModalProps) => {
   );
 };
 
-export default PasswordResetModal;
+export default ChangePasswordModal;

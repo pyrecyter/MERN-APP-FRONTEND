@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useUser } from "../hooks";
 import { Typography, Button, Box } from "@mui/material";
-import { UserProfileDisplay, PasswordResetModal } from "../components";
+import { UserProfileDisplay, ChangePasswordModal } from "../components";
 
 const AccountPage = () => {
   const { user } = useUser();
@@ -16,8 +16,8 @@ const AccountPage = () => {
   };
 
   return (
-    <>
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom>
         Account Page
       </Typography>
       {user ? (
@@ -32,8 +32,8 @@ const AccountPage = () => {
       ) : (
         <Typography variant="h6">No user data available.</Typography>
       )}
-      <PasswordResetModal open={isModalOpen} onClose={handleCloseModal} />
-    </>
+      <ChangePasswordModal open={isModalOpen} onClose={handleCloseModal} />
+    </Box>
   );
 };
 

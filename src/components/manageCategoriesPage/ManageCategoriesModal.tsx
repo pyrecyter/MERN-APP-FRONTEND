@@ -30,21 +30,33 @@ const ManageCategoriesModal = ({
   onClose,
 }: ManageCategoriesModalProps) => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [editCategory, setEditCategory] = useState<Category | null>(null);
-  const [categoryToDelete, setCategoryToDelete] = useState<Category | null>(
+  const [selecteCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
   const { setCategories } = useCategories();
   const { showMessage } = useSnackbar();
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+
+  const handleEditClick = (product: Category) => {
+    setSelectedCategory(product);
+    setEditModalOpen(true);
+  };
+
+  const handleDeleteClick = (product: Category) => {
+    setSelectedCategory(product);
+    setDeleteModalOpen(true);
+  };
 
   const handleConfirmDelete = async () => {
     try {
-      if (categoryToDelete) {
-        await deleteCategory(categoryToDelete?._id);
+      if (selecteCategory) {
+        await deleteCategory(selecteCategory?._id);
         setCategories((prev) =>
-          prev.filter((c) => c._id !== categoryToDelete?._id)
+          prev.filter((c) => c._id !== selecteCategory?._id)
         );
-        setCategoryToDelete(null);
+        setSelectedCategory(null);
+        showMessage("Category deleted", "success");
       }
     } catch (err: unknown) {
       showMessage(
@@ -72,27 +84,27 @@ const ManageCategoriesModal = ({
           >
             Manage Categories
           </Typography>
-          <Button onClick={() => setIsAddModalOpen(true)}>Add Category</Button>
+          <Button variant="contained" onClick={() => setIsAddModalOpen(true)}>
+            Add Category
+          </Button>
         </Box>
-        <CategoryTable
-          setEditCategory={setEditCategory}
-          setDeleteCategory={setCategoryToDelete}
-        />
+        <CategoryTable onEdit={handleEditClick} onDelete={handleDeleteClick} />
         {isAddModalOpen && (
           <AddCategoryModal onClose={() => setIsAddModalOpen(false)} />
         )}
-        {editCategory && (
+        {selecteCategory && (
           <EditCategoryModal
-            category={editCategory}
-            onClose={() => setEditCategory(null)}
+            open={editModalOpen}
+            category={selecteCategory}
+            onClose={() => setSelectedCategory(null)}
           />
         )}
-        {categoryToDelete && (
+        {selecteCategory && (
           <DeleteConfirmModal
-            open={true}
-            onClose={() => setCategoryToDelete(null)}
+            open={deleteModalOpen}
+            onClose={() => setSelectedCategory(null)}
             onConfirm={handleConfirmDelete}
-            message={`Are you sure you want to delete category ${categoryToDelete?.name}?`}
+            message={`Are you sure you want to delete category ${selecteCategory?.name}?`}
           />
         )}
       </Box>

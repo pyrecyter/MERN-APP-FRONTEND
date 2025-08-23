@@ -12,16 +12,14 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { StyledTableCell, StyledTableRow } from "../";
 
 interface CategoryTableProps {
-  setEditCategory: (category: Category) => void;
-  setDeleteCategory: (category: Category) => void;
+  onEdit: (category: Category) => void;
+  onDelete: (category: Category) => void;
 }
 
-const CategoryTable = ({
-  setDeleteCategory,
-  setEditCategory,
-}: CategoryTableProps) => {
+const CategoryTable = ({ onEdit, onDelete }: CategoryTableProps) => {
   const { categories } = useCategories();
 
   return (
@@ -29,15 +27,15 @@ const CategoryTable = ({
       <Table aria-label="category table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
-            <TableCell sx={{ fontWeight: "bold" }} align="right">
+            <StyledTableCell sx={{ fontWeight: "bold" }}>Name</StyledTableCell>
+            <StyledTableCell sx={{ fontWeight: "bold" }} align="right">
               Actions
-            </TableCell>
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {categories.map((category) => (
-            <TableRow
+            <StyledTableRow
               key={category._id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
@@ -45,14 +43,14 @@ const CategoryTable = ({
                 {category.name}
               </TableCell>
               <TableCell align="right">
-                <IconButton onClick={() => setEditCategory(category)}>
+                <IconButton onClick={() => onEdit(category)}>
                   <EditIcon />
                 </IconButton>
-                <IconButton onClick={() => setDeleteCategory(category)}>
+                <IconButton onClick={() => onDelete(category)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
-            </TableRow>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>

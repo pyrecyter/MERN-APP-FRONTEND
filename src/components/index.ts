@@ -3,4 +3,7 @@ export * from "./Layout";
 export * from "./accountPage";
 export * from "./manageUsersPage";
 export * from "./manageCategoriesPage";
-export { default as DeleteConfirmModal } from "./DeleteConfirmModal";
+export * from "./manageProductsPage";
+export * from "./StyledComponents";
+export * from "./DeleteConfirmModal";
+export * from "./SearchBar";

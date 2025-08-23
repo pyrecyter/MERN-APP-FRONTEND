@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { RouterProvider } from "react-router-dom";
-import { SnackbarProvider, UserProvider } from "./providers";
+import { SnackbarProvider, UserProvider, CategoryProvider, ProductProvider } from "./providers";
 import { AppLoader } from "./components";
 import theme from "./theme";
 import router from "./router";
@@ -14,12 +14,16 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ThemeProvider theme={theme}>
       <SnackbarProvider>
         <UserProvider>
-          <AppLoader>
-            <CssBaseline />
-            <RouterProvider router={router} />
-          </AppLoader>
+          <CategoryProvider>
+            <ProductProvider>
+              <AppLoader>
+                <CssBaseline />
+                <RouterProvider router={router} />
+              </AppLoader>
+            </ProductProvider>
+          </CategoryProvider>
         </UserProvider>
       </SnackbarProvider>
     </ThemeProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

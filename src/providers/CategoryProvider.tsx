@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CategoryContext } from "../contexts";
 import type { Category } from "../types";
-import { getCategories } from "../services";
+import { getCategories, isAuthenticated } from "../services";
 import { useSnackbar } from "../hooks";
 
 export const CategoryProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -12,6 +12,7 @@ export const CategoryProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const fetchCategories = async () => {
+      if (!isAuthenticated()) return;
       try {
         const data = await getCategories();
         setCategories(data);
