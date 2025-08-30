@@ -7,3 +7,4 @@ export * from "./manageProductsPage";
 export * from "./StyledComponents";
 export * from "./DeleteConfirmModal";
 export * from "./SearchBar";
+export * from "./productsPage";

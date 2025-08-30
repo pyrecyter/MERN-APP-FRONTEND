@@ -1,43 +1,58 @@
 import { useState } from "react";
-import { CategoryProvider } from "../providers/CategoryProvider";
-import ManageCategoriesModal from "../components/manageCategoriesPage/ManageCategoriesModal";
-import { Box, Button } from "@mui/material";
-
-const ProductsPageContent = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  return (
-    <Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <h1>Products</h1>
-        <Button variant="contained" onClick={handleOpenModal}>
-          Manage Categories
-        </Button>
-      </Box>
-      <ManageCategoriesModal open={isModalOpen} onClose={handleCloseModal} />
-    </Box>
-  );
-};
+import { Box, Grid, Typography } from "@mui/material";
+import { useProducts, useSnackbar } from "../hooks";
+import { AdjustStockModal, ProductCard } from "../components";
+import type { Product } from "../types";
 
 const ProductsPage = () => {
+  const { products, setProducts } = useProducts();
+  const [adjustStockModalOpen, setAdjustStockModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { showMessage } = useSnackbar();
+
+  const handleOpenAdjustStockModal = (product: Product) => {
+    setSelectedProduct(product);
+    setAdjustStockModalOpen(true);
+  };
+
+  const handleCloseAdjustStockModal = () => {
+    setAdjustStockModalOpen(false);
+    setSelectedProduct(null);
+  };
+
+  const handleStockUpdated = (updatedProduct: Product) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((p) =>
+        p._id === updatedProduct._id ? updatedProduct : p
+      )
+    );
+    showMessage("Stock updated successfully", "success");
+  };
+
   return (
-    <CategoryProvider>
-      <ProductsPageContent />
-    </CategoryProvider>
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom sx={{ mb: 2 }}>
+        Products
+      </Typography>
+      <Grid container spacing={3}>
+        {products.map((product) => (
+          <Grid key={product._id}>
+            <ProductCard
+              product={product}
+              onAdjustStock={handleOpenAdjustStockModal}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      {selectedProduct && (
+        <AdjustStockModal
+          open={adjustStockModalOpen}
+          onClose={handleCloseAdjustStockModal}
+          product={selectedProduct}
+          onStockUpdated={handleStockUpdated}
+        />
+      )}
+    </Box>
   );
 };
 
