@@ -24,7 +24,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   const canManageUsers = usePermissions(permissions.manage_users);
   const canManageProducts = usePermissions(permissions.manage_products);
   const canViewSales = usePermissions(permissions.view_sales);
-  const canRecordSale = usePermissions(permissions.record_sale);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -62,11 +61,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             {canManageProducts && (
               <Button color="inherit" component={Link} to="/manage-products">
                 Manage Products
-              </Button>
-            )}
-            {canRecordSale && (
-              <Button color="inherit" component={Link} to="/cart">
-                Cart
               </Button>
             )}
             {canManageUsers && (

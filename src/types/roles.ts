@@ -21,12 +21,14 @@ export const rolePermissions = {
     permissions.manage_categories,
     permissions.view_sales,
     permissions.adjust_inventory,
+    permissions.record_sale,
   ],
   [roles.manager]: [
     permissions.manage_products,
     permissions.manage_categories,
     permissions.view_sales,
     permissions.adjust_inventory,
+    permissions.record_sale,
   ],
   [roles.cashier]: [
     permissions.record_sale,

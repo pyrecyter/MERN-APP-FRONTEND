@@ -6,7 +6,6 @@ import { permissions } from "../types";
 import App from "../App";
 
 const ProductsPage = React.lazy(() => import("../pages/ProductsPage"));
-const CartPage = React.lazy(() => import("../pages/CartPage"));
 const AccountPage = React.lazy(() => import("../pages/AccountPage"));
 const LoginPage = React.lazy(() => import("../pages/LoginPage"));
 const ManageUsersPage = React.lazy(() => import("../pages/ManageUsersPage"));
@@ -26,16 +25,6 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <Suspense fallback={<div>Loading...</div>}>
               <ProductsPage />
-            </Suspense>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/cart",
-        element: (
-          <PrivateRoute permission={permissions.record_sale}>
-            <Suspense fallback={<div>Loading...</div>}>
-              <CartPage />
             </Suspense>
           </PrivateRoute>
         ),

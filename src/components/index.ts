@@ -8,3 +8,4 @@ export * from "./StyledComponents";
 export * from "./DeleteConfirmModal";
 export * from "./SearchBar";
 export * from "./productsPage";
+export * from "./salesPage";
